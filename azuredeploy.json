@@ -83,8 +83,6 @@
         "scriptHybridWorkerGroupName": "Hybrid-Group-Nerdio",
         "contributorRoleId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'b24988ac-6180-42a0-ab88-20f7382dd24c')]",
         "logLawName": "Az-UsE-Prod-LAW-Nerdio-App",
-        "logLawPeName": "Az-UsE-Prod-LAW-Nerdio-App-pe",
-        "logLawPeNicName": "Az-UsE-Prod-LAW-Nerdio-App-pe-nic",
         "lawInsightsPrivateEndpointName": "Az-UsE-Prod-LAW-Nerdio-App-pe",
         "lawInsightsPrivateEndpointNicName": "Az-UsE-Prod-LAW-Nerdio-App-pe-nic",
         "logLawInsightsName": "Az-UsE-Prod-LAW-Nerdio-Insights",
