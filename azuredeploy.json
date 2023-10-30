@@ -89,9 +89,10 @@
         "lawInsightsPrivateEndpointNicName": "Az-UsE-Prod-LAW-Nerdio-App-pe-nic",
         "logLawInsightsName": "Az-UsE-Prod-LAW-Nerdio-Insights",
         "vnetID": "[resourceId('Az-UsE-Prod-Rg-Network','Microsoft.Network/virtualNetworks', 'Az-UsE-Prod-VNet-Services')]",
-        "appSnet": "[resourceId('Az-UsE-Prod-Rg-Network','Microsoft.Network/virtualNetworks/subnets', 'Az-UsE-Prod-VNet-Services', 'Az-UsE-Prod-SNet-App')]",
-        "sqlSnet": "[resourceId('Az-UsE-Prod-Rg-Network','Microsoft.Network/virtualNetworks/subnets', 'Az-UsE-Prod-VNet-Services', 'Az-UsE-Prod-SNet-SQL')]",
-        "webSnet": "[resourceId('Az-UsE-Prod-Rg-Network','Microsoft.Network/virtualNetworks/subnets', 'Az-UsE-Prod-VNet-Services', 'Az-UsE-Prod-SNet-Web')]",
+        "appSnetID": "[resourceId('Az-UsE-Prod-Rg-Network','Microsoft.Network/virtualNetworks/subnets', 'Az-UsE-Prod-VNet-Services', 'Az-UsE-Prod-SNet-App')]",
+        "sqlSnetID": "[resourceId('Az-UsE-Prod-Rg-Network','Microsoft.Network/virtualNetworks/subnets', 'Az-UsE-Prod-VNet-Services', 'Az-UsE-Prod-SNet-SQL')]",
+        "webSnetID": "[resourceId('Az-UsE-Prod-Rg-Network','Microsoft.Network/virtualNetworks/subnets', 'Az-UsE-Prod-VNet-Services', 'Az-UsE-Prod-SNet-Web')]",
+        "appIntegrationSnetID": "[resourceId('Az-UsE-Prod-Rg-Network','Microsoft.Network/virtualNetworks/subnets', 'Az-UsE-Prod-VNet-Services', 'Az-UsE-Prod-SNet-PaaS-Web-Nerdio')]",
         "privateLinkID": "[resourceId('Az-UsE-Prod-Rg-Monitor','microsoft.insights/privatelinkscopes', 'Az-UsE-Prod-AMPLS')]",
         "sqlServerLogin": "[concat('L', uniqueString(resourceGroup().id, parameters('_securityGuid'), 'f0a91824-fc25-4cc9-937e-f92791fdab21'))]",
         "sqlServerPassword": "[concat('P', uniqueString(resourceGroup().id, parameters('_securityGuid'), 'e0235df7-82e2-469d-9678-1750453dff32'), 'x', '!')]",
@@ -207,7 +208,7 @@
                 ],
                 "customNetworkInterfaceName": "[variables('sqlServerPrivateEndpointNicName')]",
                 "subnet": {
-                    "id": "[variables('sqlSnet')]"
+                    "id": "[variables('sqlSnetID')]"
                 }
             }
         },
@@ -234,7 +235,7 @@
                 ],
                 "customNetworkInterfaceName": "[variables('keyVaultPrivateEndpointNicName')]",
                 "subnet": {
-                    "id": "[variables('webSnet')]"
+                    "id": "[variables('webSnetID')]"
                 }
             }
         },
@@ -262,7 +263,7 @@
                 ],
                 "customNetworkInterfaceName": "[variables('autoAccountPrivateEndpointNicName')]",
                 "subnet": {
-                    "id": "[variables('appSnet')]"
+                    "id": "[variables('appSnetID')]"
                 }
             }
         },
@@ -290,7 +291,7 @@
                 ],
                 "customNetworkInterfaceName": "[variables('scriptAutoAccountPrivateEndpointNicName')]",
                 "subnet": {
-                    "id": "[variables('appSnet')]"
+                    "id": "[variables('appSnetID')]"
                 }
             }
         },
@@ -314,7 +315,7 @@
                 ],
                 "customNetworkInterfaceName": "[variables('lawInsightsPrivateEndpointNicName')]",
                 "subnet": {
-                    "id": "[variables('appSnet')]"
+                    "id": "[variables('appSnetID')]"
                 }
             }
         },
@@ -340,7 +341,7 @@
                         "name": "ipconfig1",
                         "properties": {
                             "subnet": {
-                                "id": "[variables('appSnet')]"
+                                "id": "[variables('appSnetID')]"
                             },
                             "privateIPAllocationMethod": "Dynamic"
                         }
@@ -359,7 +360,7 @@
                         "name": "ipconfig1",
                         "properties": {
                             "subnet": {
-                                "id": "[variables('appSnet')]"
+                                "id": "[variables('appSnetID')]"
                             },
                             "privateIPAllocationMethod": "Dynamic"
                         }
@@ -661,7 +662,8 @@
             },
             "properties": {
                 "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]",
-                "httpsOnly": true
+                "httpsOnly": true,
+                "virtualNetworkSubnetId": "[variables('appIntegrationSnetID')]"
             },
             "dependsOn": [
                 "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]",
