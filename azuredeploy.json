@@ -382,7 +382,7 @@
             },
             "properties": {
                 "hardwareProfile": {
-                    "vmSize": "Standard_D4s_v4"
+                    "vmSize": "Standard_D4ds_v5"
                 },
                 "storageProfile": {
                     "osDisk": {
@@ -393,9 +393,9 @@
                         "deleteOption": "Delete"
                     },
                     "imageReference": {
-                        "publisher": "MicrosoftWindowsDesktop",
-                        "offer": "Windows-10",
-                        "sku": "rs5-enterprise-g2",
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2022-datacenter-g2",
                         "version": "latest"
                     }
                 },
@@ -410,7 +410,7 @@
                     ]
                 },
                 "osProfile": {
-                    "computerName": "hwaavm00",
+                    "computerName": "[variables('hybridWorkerAppAaVmName')]",
                     "adminUsername": "[parameters('adminUsername')]",
                     "adminPassword": "[parameters('adminPassword')]",
                     "windowsConfiguration": {
@@ -422,7 +422,7 @@
                         }
                     }
                 },
-                "licenseType": "Windows_Client",
+                "licenseType": "Windows_Server",
                 "securityProfile": {
                     "securityType": "TrustedLaunch",
                     "uefiSettings": {
@@ -453,7 +453,7 @@
             },
             "properties": {
                 "hardwareProfile": {
-                    "vmSize": "Standard_D4s_v4"
+                    "vmSize": "Standard_D4ds_v5"
                 },
                 "storageProfile": {
                     "osDisk": {
@@ -464,9 +464,9 @@
                         "deleteOption": "Delete"
                     },
                     "imageReference": {
-                        "publisher": "MicrosoftWindowsDesktop",
-                        "offer": "Windows-10",
-                        "sku": "rs5-enterprise-g2",
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2022-datacenter-g2",
                         "version": "latest"
                     }
                 },
@@ -481,7 +481,7 @@
                     ]
                 },
                 "osProfile": {
-                    "computerName": "hwaascriptvm00",
+                    "computerName": "[variables('hybridWorkerScriptAaVmName')]",
                     "adminUsername": "[parameters('adminUsername')]",
                     "adminPassword": "[parameters('adminPassword')]",
                     "windowsConfiguration": {
@@ -493,7 +493,7 @@
                         }
                     }
                 },
-                "licenseType": "Windows_Client",
+                "licenseType": "Windows_Server",
                 "securityProfile": {
                     "securityType": "TrustedLaunch",
                     "uefiSettings": {
